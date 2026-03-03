@@ -3,6 +3,7 @@ package es.daw.clinicaapi.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -38,6 +39,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/**","/h2-console/**").permitAll()
                         //.anyRequest().permitAll() // para acceso público
                         // PENDIENTE!!! REGLA DE ACCESO AL ENDPOINT POST /api/appointments
+                        .requestMatchers(HttpMethod.GET,"/api/reports/top-services2").permitAll()
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider)
